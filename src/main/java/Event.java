@@ -88,4 +88,20 @@ public class Event {
     return pricePerPerson * mGuestCount + entertainmentPrice;
   }
 
+  public double getDiscountPrice(String coupon) {
+    double discount = 0;
+    if (coupon.equals("freeDJ") && mFoodSelection.equals("Dinner") && mBeverageSelection.equals("Full Bar") && mGuestCount >= 150) {
+      discount = getEventPrice() - 300;
+    } else if (coupon.equals("20%off")) {
+      discount = getEventPrice() * 0.8;
+    } else {
+      discount = getEventPrice();
+    }
+
+
+    discount = Math.round(discount * 100);
+    return discount/100;
+    // return (Math.round(discount * 100))/100;
+  }
+
 }
