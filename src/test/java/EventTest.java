@@ -1,5 +1,7 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+// import java.util.List;
+// import java.util.ArrayList;
 
 public class EventTest {
 
@@ -39,5 +41,11 @@ public class EventTest {
   @Test
   public void getEntertainmentSelection_returnsTheOptionSelected_DJ() {
     assertEquals("DJ", testEvent.getEnterainmentSelection());
+  }
+
+  @Test
+  public void getFoodOptions_staticMethodReturnsArrayOfOptions() {
+    String[] testFoodOptions = {"Snack Bar", "Buffet", "Catering", "Dinner"};
+    assertEquals(testFoodOptions, Event.getFoodOptions());
   }
 }
