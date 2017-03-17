@@ -5,6 +5,8 @@ public class Event {
   private String mEntertainmentSelection;
 
   private static String[] mFoodOptions = {"Snack Bar", "Buffet", "Catering", "Dinner"};
+  private static String[] mBeverageOptions = {"Full Bar", "Non-Alcoholic only", "BYOB"};
+  private static String[] mEntertainmentOptions = {"DJ", "Live Band", "Comedian", "Magician"};
 
   public Event(int guestCount, String food, String beverage, String entertainment) {
     mGuestCount = guestCount;
@@ -31,5 +33,13 @@ public class Event {
 
   public static String[] getFoodOptions() {
     return mFoodOptions;
+  }
+
+  public static String[] getBeverageOptions() {
+    return mBeverageOptions;
+  }
+
+  public static String[] getEntertainmentOptions() {
+    return mEntertainmentOptions;
   }
 }

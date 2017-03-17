@@ -48,4 +48,16 @@ public class EventTest {
     String[] testFoodOptions = {"Snack Bar", "Buffet", "Catering", "Dinner"};
     assertEquals(testFoodOptions, Event.getFoodOptions());
   }
+
+  @Test
+  public void getBeverageOptions_staticMethodReturnsArrayOfOptions() {
+    String[] testBeverageOptions = {"Full Bar", "Non-Alcoholic only", "BYOB"};
+    assertEquals(testBeverageOptions, Event.getBeverageOptions());
+  }
+
+  @Test
+  public void getEntertainmentOptions_staticMethodReturnsArrayOfOptions() {
+    String[] testEntertainmentOptions = {"DJ", "Live Band", "Comedian", "Magician"};
+    assertEquals(testEntertainmentOptions, Event.getEntertainmentOptions());
+  }
 }
