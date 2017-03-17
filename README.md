@@ -19,6 +19,7 @@ _This project will prompt the user to answer a few questions about the event the
 | Print the selected entertainment option | entertainment | "DJ" |
 | Print the total price of event based on selected options | price | $1000 |
 | Enter coupon code and print discounted price | "coupon1" | $800 |
+| Determine if event is eligible for a discount | event | true |
 
 
 
