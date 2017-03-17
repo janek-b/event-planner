@@ -9,6 +9,7 @@ public class Event {
   private static String[] mFoodOptions = {"Snack Bar", "Buffet", "Dinner"};
   private static String[] mBeverageOptions = {"Full Bar", "Non-Alcoholic", "BYOB"};
   private static String[] mEntertainmentOptions = {"DJ", "Live Band", "Comedian", "Magician", "None"};
+  private static String[] mCouponCodes = {"freeDJ", "20%off"};
 
   public Event(int guestCount, int food, int beverage, int entertainment) {
     mGuestCount = guestCount;
@@ -45,9 +46,13 @@ public class Event {
     return mEntertainmentOptions;
   }
 
-  public int getEventPrice() {
-    int pricePerPerson = 0;
-    int entertainmentPrice = 0;
+  public static String[] getCouponCodes() {
+    return mCouponCodes;
+  }
+
+  public double getEventPrice() {
+    double pricePerPerson = 0;
+    double entertainmentPrice = 0;
     switch (mFoodSelection) {
       case "Snack Bar" :
         pricePerPerson += 2;
@@ -104,9 +109,19 @@ public class Event {
   }
 
   public boolean isEligibleForDiscount() {
-    freeDJ = (mFoodSelection.equals("Dinner") && mBeverageSelection.equals("Full Bar") && mGuestCount >= 150);
+    freeDJ = (mEntertainmentSelection.equals("DJ") && mFoodSelection.equals("Dinner") && mBeverageSelection.equals("Full Bar") && mGuestCount >= 150);
     percentOff = (getEventPrice() > 4000);
     return freeDJ || percentOff;
+  }
+
+  public boolean isEligibleForDiscount(String coupon) {
+    boolean result = false;
+    if (coupon.equals("freeDJ")) {
+      result = freeDJ;
+    } else if (coupon.equals("20%off")) {
+      result = percentOff;
+    }
+    return result;
   }
 
 }

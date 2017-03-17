@@ -62,10 +62,16 @@ public class EventTest {
   }
 
   @Test
+  public void getCouponCodes_staticMethodReturnsArrayOfCodes() {
+    String[] testCouponCodes = {"freeDJ", "20%off"};
+    assertEquals(testCouponCodes, Event.getCouponCodes());
+  }
+
+  @Test
   public void getEventPrice_returnsAccurateEstimateBasedOnOptions_2000() {
-    assertEquals(2000, testEvent.getEventPrice());
+    assertEquals(2000, testEvent.getEventPrice(), 0.01);
     Event testEvent2 = new Event(50, 2, 0, 1);
-    assertEquals(2150, testEvent2.getEventPrice());
+    assertEquals(2150, testEvent2.getEventPrice(), 0.01);
   }
 
   @Test
@@ -97,5 +103,14 @@ public class EventTest {
     Event testPercentoffEligible = new Event(250, 2, 0, 1);
     assertEquals(true, testPercentoffEligible.isEligibleForDiscount());
     assertEquals(false, testEvent.isEligibleForDiscount());
+  }
+
+  @Test
+  public void isEligibleForDiscount_returnCorrectlyWhenGivenArgument() {
+    Event testDJ = new Event(150, 2, 0, 0);
+    testDJ.isEligibleForDiscount();
+    testEvent.isEligibleForDiscount();
+    assertEquals(true, testDJ.isEligibleForDiscount("freeDJ"));
+    assertEquals(false, testEvent.isEligibleForDiscount("freeDJ"));
   }
 }

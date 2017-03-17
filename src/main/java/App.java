@@ -1,4 +1,5 @@
 import java.io.Console;
+import java.util.Arrays;
 
 public class App {
   private static Console console = System.console();
@@ -14,29 +15,36 @@ public class App {
       int food = getSelection("Food", Event.getFoodOptions());
       int beverage = getSelection("Beverage", Event.getBeverageOptions());
       int entertainment = getSelection("Entertainment", Event.getEntertainmentOptions());
-      String couponCode = "";
+
       Event newEvent = new Event(guestCount, food, beverage, entertainment);
+
       printEventdetails(newEvent);
-      System.out.println(String.format("The Estimated price for your event: \t$%.2f", newEvent.getDiscountPrice(couponCode)));
+      System.out.println(String.format("The Estimated price for your event: \t$%.2f", newEvent.getEventPrice()));
 
-
-      boolean couponEntered = false;
-      while (!couponEntered) {
-        couponCode = console.readLine("\nEnter a coupon code to find out if you're eligable for a discounted price.\n");
-        if (couponCode.equals("")) {
-          System.out.println("\nYou did not enter a valid coupon code. No discount applied.\n");
-          String tryagain = console.readLine("Try Again?\t");
-          if (tryagain.toLowerCase().charAt(0) == 'n') {
+      if (newEvent.isEligibleForDiscount()) {
+        String couponCode = console.readLine("\nYou are eligible for a discount. Enter a coupon code to redeem your discount.\n");
+        boolean couponEntered = false;
+        while (!couponEntered) {
+          if (!Arrays.asList(Event.getCouponCodes()).contains(couponCode)) {
+            System.out.println("You did not enter a valid coupon code. No discount applied.\n");
+            couponCode = console.readLine("Try a different code or type 'Exit' to skip\t");
+            if (couponCode.toLowerCase().equals("exit")) {
+              couponEntered = true;
+            }
+          } else if (!newEvent.isEligibleForDiscount(couponCode)) {
+            System.out.println("You are not eligible for this discount.\n");
+            couponCode = console.readLine("Try a different code or type 'Exit' to skip\t");
+            if (couponCode.toLowerCase().equals("exit")) {
+              couponEntered = true;
+            }
+          } else if (newEvent.isEligibleForDiscount(couponCode)) {
+            System.out.println(String.format("\nThe price after applying your discount is: $%.2f", newEvent.getDiscountPrice(couponCode)));
             couponEntered = true;
           }
-        } else {
-          System.out.println(String.format("\nThe price after applying your coupon code is: $%.2f", newEvent.getDiscountPrice(couponCode)));
-          couponEntered = true;
         }
       }
 
-
-      String booked = console.readLine("Book this event?\t");
+      String booked = console.readLine("\nBook this event?\t");
       if (booked.toLowerCase().charAt(0) == 'y') {
         System.out.println("Thank you for planning your event with us.");
         eventBooked = true;
