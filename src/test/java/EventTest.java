@@ -9,7 +9,7 @@ public class EventTest {
 
   @Before
   public void setUp() {
-    testEvent = new Event(100, "Catering", "Full Bar", "DJ");
+    testEvent = new Event(100, 0, 0, 0);
   }
 
   @After
@@ -30,7 +30,7 @@ public class EventTest {
 
   @Test
   public void getFoodSelection_returnsTheOptionSelected_Catering() {
-    assertEquals("Catering", testEvent.getFoodSelection());
+    assertEquals("Snack Bar", testEvent.getFoodSelection());
   }
 
   @Test
@@ -45,19 +45,26 @@ public class EventTest {
 
   @Test
   public void getFoodOptions_staticMethodReturnsArrayOfOptions() {
-    String[] testFoodOptions = {"Snack Bar", "Buffet", "Catering", "Dinner"};
+    String[] testFoodOptions = {"Snack Bar", "Buffet", "Dinner"};
     assertEquals(testFoodOptions, Event.getFoodOptions());
   }
 
   @Test
   public void getBeverageOptions_staticMethodReturnsArrayOfOptions() {
-    String[] testBeverageOptions = {"Full Bar", "Non-Alcoholic only", "BYOB"};
+    String[] testBeverageOptions = {"Full Bar", "Non-Alcoholic", "BYOB"};
     assertEquals(testBeverageOptions, Event.getBeverageOptions());
   }
 
   @Test
   public void getEntertainmentOptions_staticMethodReturnsArrayOfOptions() {
-    String[] testEntertainmentOptions = {"DJ", "Live Band", "Comedian", "Magician"};
+    String[] testEntertainmentOptions = {"DJ", "Live Band", "Comedian", "Magician", "None"};
     assertEquals(testEntertainmentOptions, Event.getEntertainmentOptions());
+  }
+
+  @Test
+  public void getEventPrice_returnsAccurateEstimateBasedOnOptions_2000() {
+    assertEquals(2000, testEvent.getEventPrice());
+    Event testEvent2 = new Event(50, 2, 0, 1);
+    assertEquals(2150, testEvent2.getEventPrice());
   }
 }

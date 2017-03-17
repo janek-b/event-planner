@@ -4,15 +4,15 @@ public class Event {
   private String mBeverageSelection;
   private String mEntertainmentSelection;
 
-  private static String[] mFoodOptions = {"Snack Bar", "Buffet", "Catering", "Dinner"};
-  private static String[] mBeverageOptions = {"Full Bar", "Non-Alcoholic only", "BYOB"};
-  private static String[] mEntertainmentOptions = {"DJ", "Live Band", "Comedian", "Magician"};
+  private static String[] mFoodOptions = {"Snack Bar", "Buffet", "Dinner"};
+  private static String[] mBeverageOptions = {"Full Bar", "Non-Alcoholic", "BYOB"};
+  private static String[] mEntertainmentOptions = {"DJ", "Live Band", "Comedian", "Magician", "None"};
 
-  public Event(int guestCount, String food, String beverage, String entertainment) {
+  public Event(int guestCount, int food, int beverage, int entertainment) {
     mGuestCount = guestCount;
-    mFoodSelection = food;
-    mBeverageSelection = beverage;
-    mEntertainmentSelection = entertainment;
+    mFoodSelection = mFoodOptions[food];
+    mBeverageSelection = mBeverageOptions[beverage];
+    mEntertainmentSelection = mEntertainmentOptions[entertainment];
   }
 
   public int getGuestCount() {
@@ -42,4 +42,50 @@ public class Event {
   public static String[] getEntertainmentOptions() {
     return mEntertainmentOptions;
   }
+
+  public int getEventPrice() {
+    int pricePerPerson = 0;
+    int entertainmentPrice = 0;
+    switch (mFoodSelection) {
+      case "Snack Bar" :
+        pricePerPerson += 2;
+        break;
+      case "Buffet" :
+        pricePerPerson += 10;
+        break;
+      case "Dinner" :
+        pricePerPerson += 20;
+        break;
+    }
+    switch (mBeverageSelection) {
+      case "Full Bar":
+        pricePerPerson += 15;
+        break;
+      case "Non-Alcoholic":
+        pricePerPerson += 5;
+        break;
+      case "BYOB":
+        pricePerPerson += 0;
+        break;
+    }
+    switch (mEntertainmentSelection) {
+      case "DJ":
+        entertainmentPrice = 300;
+        break;
+      case "Live Band":
+        entertainmentPrice = 400;
+        break;
+      case "Comedian":
+        entertainmentPrice = 200;
+        break;
+      case "Magician":
+        entertainmentPrice = 100;
+        break;
+      case "None":
+        entertainmentPrice = 0;
+        break;
+    }
+    return pricePerPerson * mGuestCount + entertainmentPrice;
+  }
+
 }
