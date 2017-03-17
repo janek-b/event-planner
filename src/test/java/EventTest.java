@@ -3,16 +3,31 @@ import static org.junit.Assert.*;
 
 public class EventTest {
 
+  private Event testEvent;
+
+  @Before
+  public void setUp() {
+    testEvent = new Event(100, "Catering");
+  }
+
+  @After
+  public void tearDown() {
+    testEvent = null;
+    assertNull(testEvent);
+  }
 
   @Test
   public void newEvent_instantiatedCorrectly() {
-    Event testEvent = new Event(100);
     assertEquals(true, testEvent instanceof Event);
   }
 
   @Test
   public void getGuestCount_returnsTheCorrectNumberOfGuests_100() {
-    Event testEvent = new Event(100);
     assertEquals(100, testEvent.getGuestCount());
+  }
+
+  @Test
+  public void getFoodSelection_returnsTheOptionSelected_Catering() {
+    assertEquals("Catering", testEvent.getFoodSelection());
   }
 }
