@@ -98,9 +98,9 @@ public class Event {
       discount = getEventPrice();
     }
 
-
-    discount = Math.round(discount * 100);
-    return discount/100;
+    return discount;
+    // discount = Math.round(discount * 100);
+    // return discount/100;
     // return (Math.round(discount * 100))/100;
   }
 

@@ -72,16 +72,16 @@ public class EventTest {
   public void getDiscountPrice_freeDJIfMoreThan150PeoplewithFoodAndDrink() {
     Event testDJDiscount1 = new Event(150, 2, 0, 0);
     Event testDJDiscount2 = new Event(150, 1, 0, 0);
-    assertEquals(5250, testDJDiscount1.getDiscountPrice("freeDJ"), 0.0);
-    assertEquals(4050, testDJDiscount2.getDiscountPrice("freeDJ"), 0.0);
-    assertEquals(2000, testEvent.getDiscountPrice("freeDJ"), 0.0);
+    assertEquals(5250, testDJDiscount1.getDiscountPrice("freeDJ"), 0.01);
+    assertEquals(4050, testDJDiscount2.getDiscountPrice("freeDJ"), 0.01);
+    assertEquals(2000, testEvent.getDiscountPrice("freeDJ"), 0.01);
   }
 
   @Test
   public void getDiscountPrice_20PercentOffWhenDinnerAndBar() {
     Event testPercentDiscount1 = new Event(50, 2, 0, 1);
     Event testPercentDiscount2 = new Event(53, 0, 0, 0);
-    assertEquals(1720, testPercentDiscount1.getDiscountPrice("20%off"), 0.0);
-    assertEquals(960.8, testPercentDiscount2.getDiscountPrice("20%off"), 0.0);
+    assertEquals(1720, testPercentDiscount1.getDiscountPrice("20%off"), 0.01);
+    assertEquals(960.8, testPercentDiscount2.getDiscountPrice("20%off"), 0.01);
   }
 }
